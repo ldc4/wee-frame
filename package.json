@@ -1,0 +1,22 @@
+{
+  "name": "wee-frame",
+  "version": "0.0.0",
+  "description": "react frame",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ldc4/wee-frame.git"
+  },
+  "keywords": [
+    "frame"
+  ],
+  "author": "weedust",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ldc4/wee-frame/issues"
+  },
+  "homepage": "https://github.com/ldc4/wee-frame#readme"
+}
