@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from './Layout';
 
 function MainRouter() {
-
-
   return (
     <Router>
-      <Switch>
-        <Route path="/" render={(props) => {
-          return <Layout />
-        }} />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Layout />} />
+      </Routes>
     </Router>
   )
 }
