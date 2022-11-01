@@ -1,0 +1,16 @@
+{
+  "name": "wee-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "wee dev app",
+    "start": "wee start app",
+    "build": "wee build app"
+  },
+  "dependencies": {
+    "wee-frame": "0.0.0"
+  },
+  "author": "",
+  "license": "MIT"
+}

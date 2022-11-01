@@ -1,60 +1,10 @@
 {
-  "name": "wee-frame",
-  "version": "0.0.0",
-  "description": "react frame",
-  "main": "index.js",
-  "bin": {
-    "wee": "./bin/main.js"
-  },
-  "scripts": {
-    "start": "node ./bin/main.js start app",
-    "build": "node ./bin/main.js build app"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ldc4/wee-frame.git"
-  },
-  "keywords": [
-    "frame"
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "packages/*"
   ],
-  "author": "weedust",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ldc4/wee-frame/issues"
-  },
-  "homepage": "https://github.com/ldc4/wee-frame#readme",
   "devDependencies": {
-    "@babel/core": "^7.17.8",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-react": "^7.16.7",
-    "autoprefixer": "^10.4.4",
-    "babel-loader": "^8.2.4",
-    "clean-webpack-plugin": "^4.0.0",
-    "commander": "^9.1.0",
-    "css-loader": "^6.7.1",
-    "express": "^4.17.3",
-    "html-webpack-plugin": "^5.5.0",
-    "image-webpack-loader": "^8.1.0",
-    "less": "^4.1.2",
-    "less-loader": "^10.2.0",
-    "postcss-loader": "^6.2.1",
-    "style-loader": "^3.3.1",
-    "ts-loader": "^9.2.8",
-    "typescript": "^4.6.3",
-    "uglifyjs-webpack-plugin": "^2.2.0",
-    "url-loader": "^4.1.1",
-    "webpack": "^5.64.4",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-middleware": "^5.3.1",
-    "webpack-dev-server": "^4.6.0",
-    "webpack-hot-middleware": "^2.25.1",
-    "webpack-merge": "^5.8.0"
-  },
-  "dependencies": {
-    "@types/react": "^17.0.43",
-    "@types/react-dom": "^17.0.14",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-router-dom": "^6.3.0"
+    "lerna": "^6.0.1"
   }
 }
