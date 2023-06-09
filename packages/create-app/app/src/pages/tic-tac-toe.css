@@ -1,0 +1,15 @@
+.tic-tac-toe {
+  
+}
+
+.tic-tac-toe .row {
+  display: flex;
+}
+
+.tic-tac-toe .row .cell {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgb(70, 123, 172);
+  text-align: center;
+  line-height: 40px;
+}

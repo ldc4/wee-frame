@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const start = require('../lib/start');
-const build = require('../lib/build');
+const start = require('../scripts/start').default;
+const build = require('../scripts/build').default;
 const commander = require('commander');
 const program = new commander.Command();
 

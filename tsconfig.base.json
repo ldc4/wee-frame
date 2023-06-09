@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "declaration": true,        // 为子项目生成.d.ts声明文件
+    "esModuleInterop": true,    // 处理模块间的一些问题
+    "module": "commonjs",       // 设置程序的模块系统
+    "moduleResolution": "node", // 指定模块解析策略
+    "noUnusedLocals": true,     // 类型检查相关配置
+    "noUnusedParameters": true, // 类型检查相关配置
+    "strict": true,             // 启用严格类型检查
+    "skipLibCheck": true,       // 跳过声明文件的类型检查
+    "target": "es2019",         // 指定ECMAScript目标版本
+    "jsx": "react",             // 控制如何在 JavaScript 文件中发出 JSX 构造
+    "allowJs": true,
+  },
+  "exclude": [
+    "**/node_modules",
+    "**/dist",
+    "**/scripts",
+  ]
+}

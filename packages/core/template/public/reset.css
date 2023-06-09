@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font: 16px/1.8 "Lato", "Microsoft Jhenghei", "Hiragino Sans GB", "Microsoft YaHei", arial, sans-serif;
+  color: #333;
+  background: rgb(217, 222, 228);
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+::selection {
+  background: #222;
+  color: white;
+}
+
+a {
+  color: #333;
+}
+
+p {
+  margin: 20px 0;
+}
+
+ul, ol {
+  list-style: none;
+}

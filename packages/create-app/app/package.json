@@ -1,0 +1,17 @@
+{
+  "name": "@vvee/app",
+  "version": "0.0.1",
+  "description": "wee-frame app",
+  "main": "index.js",
+  "scripts": {
+    "start": "wee start app",
+    "build": "wee build app",
+    "debug": "node --inspect-brk=5858 ../../node_modules/.bin/wee start app"
+  },
+  "dependencies": {
+    "@vvee/cli": "*",
+    "lodash": "^4.17.21"
+  },
+  "author": "",
+  "license": "MIT"
+}

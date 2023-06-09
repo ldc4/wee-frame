@@ -1,9 +1,12 @@
 {
-  "name": "root",
+  "name": "wee-frame",
   "private": true,
+  "author": "weedust",
+  "license": "MIT",
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {},
   "devDependencies": {
     "lerna": "^6.0.1"
   }

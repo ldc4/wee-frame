@@ -7,17 +7,30 @@ module.exports = (context) => {
 
   const { mode, config } = context;
 
-  const framePath = path.resolve(__dirname, '..', 'src');
-  const appPath = path.resolve(process.cwd(), 'src');
+  const { appPath, framePath } = config;
+
+  // 模板路径
+  const weePath = path.resolve(appPath, '.wee');
+
+  // 用户源码路径
+  const srcPath = path.resolve(appPath, 'src');
+
+  // 用户页面路径
+  const pagesPath = path.resolve(srcPath, 'pages');
+
+  // 用户布局路径
+  const layoutsPath = path.resolve(srcPath, 'layouts');
+
+  const include = [weePath, srcPath];
 
   return {
     mode,
     entry: {
       frame: mode === 'development' ? [
         'webpack-hot-middleware/client?noInfo=true&reload=true',    // 添加webpack-hot-middleware入口
-        path.resolve(__dirname, '../src/index.tsx')
+        path.resolve(weePath, 'entry.tsx')
       ] : [
-        path.resolve(__dirname, '../src/index.tsx')
+        path.resolve(weePath, 'entry.tsx')
       ]
     },
     output: {
@@ -27,15 +40,20 @@ module.exports = (context) => {
     },
     resolve: {
       extensions: [ '.tsx', '.jsx', '.ts', '.js' ],
+      alias: {
+        '@app': appPath,
+        '@pages': pagesPath,
+        '@layouts': layoutsPath,
+      },
       modules: [
         'node_modules',
-        path.resolve(__dirname, '..', 'node_modules') // 使用框架中的module
+        path.resolve(framePath, 'node_modules') // 使用框架中的module
       ]
     },
     resolveLoader: {
       modules: [
         'node_modules',
-        path.resolve(__dirname, '..', 'node_modules') // 使用框架中的loader
+        path.resolve(framePath, 'node_modules') // 使用框架中的loader
       ]
     },
     module: {
@@ -45,15 +63,21 @@ module.exports = (context) => {
           use: [
             { loader: 'babel-loader' }
           ],
-          include: [framePath, appPath]
+          include,
         },
         {
           test: /\.ts(x?)$/,
           use: [
             { loader: 'babel-loader' },
-            { loader: 'ts-loader' }
+            {
+              loader: 'ts-loader',
+              options: {
+                // 指定TS配置
+                configFile: path.resolve(weePath, 'tsconfig.json'),
+              },
+            }
           ],
-          include: [framePath, appPath]
+          include,
         },
         {
           test: /\.(less|css)$/,
@@ -63,7 +87,7 @@ module.exports = (context) => {
             { loader: 'postcss-loader' },
             { loader: 'less-loader' }
           ],
-          include: [framePath, appPath]
+          include,
         },
         {
           test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -77,7 +101,7 @@ module.exports = (context) => {
               options: { bypassOnDebug: true }
             }
           ],
-          include: [framePath, appPath]
+          include,
         },
         {
           test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
@@ -85,7 +109,7 @@ module.exports = (context) => {
             loader: 'url-loader',
             options: { limit: 8192 }
           },
-          include: [framePath, appPath]
+          include,
         }
       ]
     },
@@ -95,7 +119,7 @@ module.exports = (context) => {
         templateParameters: {
           title: config.title,
         },
-        template: path.resolve(__dirname, '../src/index.html'),
+        template: path.resolve(weePath, 'public', 'index.html'),
         minify: {
           collapseWhitespace: true
         }

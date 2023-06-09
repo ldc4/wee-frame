@@ -1,0 +1,10 @@
+.other-second-layout {
+  height: 100%;
+  width: 100%;
+}
+
+.other-second-layout .footer {
+  height: 64px;
+  background-color: violet;
+  opacity: 0.3;
+}

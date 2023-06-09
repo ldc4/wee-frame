@@ -1,0 +1,21 @@
+.main-layout {
+  height: 100%;
+  width: 100%;
+}
+
+.main-layout .top-menu {
+  height: 64px;
+  background-color: dodgerblue;
+  opacity: 0.3;
+}
+
+.main-layout .body {
+  height: calc(100% - 64px);
+  display: flex;
+}
+
+.main-layout .body .sidebar {
+  width: 300px;
+  background-color: yellowgreen;
+  opacity: 0.3;
+}

@@ -1,0 +1,10 @@
+.other-first-layout {
+  height: 100%;
+  width: 100%;
+}
+
+.other-first-layout .header {
+  height: 64px;
+  background-color: orange;
+  opacity: 0.3;
+}
