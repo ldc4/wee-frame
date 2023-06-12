@@ -1,6 +1,6 @@
 {
   "name": "@vvee/cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "wee-frame cli",
   "main": "index.js",
   "bin": {
@@ -22,7 +22,15 @@
     "url": "https://github.com/ldc4/wee-frame/issues"
   },
   "homepage": "https://github.com/ldc4/wee-frame#readme",
-  "devDependencies": {
+  "dependencies": {
+    "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.8",
+    "@vvee/core": "*",
+    "lodash": "^4.17.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.3.0",
+    "ts-node": "^10.9.1",
     "@babel/core": "^7.17.8",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
@@ -50,15 +58,5 @@
     "webpack-dev-server": "^4.6.0",
     "webpack-hot-middleware": "^2.25.1",
     "webpack-merge": "^5.8.0"
-  },
-  "dependencies": {
-    "@types/react": "^18.0.24",
-    "@types/react-dom": "^18.0.8",
-    "@vvee/core": "*",
-    "lodash": "^4.17.21",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.3.0",
-    "ts-node": "^10.9.1"
   }
 }
