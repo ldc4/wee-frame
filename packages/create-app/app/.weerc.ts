@@ -1,6 +1,6 @@
 export default {
   layouts: {
-    // 采用glob匹配路径
+    // key采用链式指定嵌套布局，value采用glob匹配路径
     'main-layout': ['demo/**'],
     'other/first-layout': ['demo/**'],
     'main-layout>other/first-layout': ['demo/**'],

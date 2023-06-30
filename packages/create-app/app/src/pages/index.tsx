@@ -57,6 +57,7 @@ export default function App() {
           <div className="menu">
             <Link to="/demo" className="animate-init">示例1：路由与布局示例</Link>
             <Link to="/tic-tac-toe" className="animate-init">示例2：TicTacToe</Link>
+            <Link to="/other/docs" className="animate-init">示例3：Markdown生成页面</Link>
           </div>
           <div className="location">
             <i className="location-icon"></i>

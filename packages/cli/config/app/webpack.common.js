@@ -3,11 +3,12 @@ const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+
 module.exports = (context) => {
 
   const { mode, config } = context;
 
-  const { appPath, framePath } = config;
+  const { appPath } = config;
 
   // 模板路径
   const weePath = path.resolve(appPath, '.wee');
@@ -21,6 +22,7 @@ module.exports = (context) => {
   // 用户布局路径
   const layoutsPath = path.resolve(srcPath, 'layouts');
 
+  // 解析文件的范围
   const include = [weePath, srcPath];
 
   return {
@@ -35,11 +37,11 @@ module.exports = (context) => {
     },
     output: {
       filename: '[name].bundle.js',
-      path: path.resolve(process.cwd(), 'dist'),
+      path: path.resolve(appPath, 'dist'),
       publicPath: '/',
     },
     resolve: {
-      extensions: [ '.tsx', '.jsx', '.ts', '.js' ],
+      extensions: [ '.tsx', '.jsx', '.md', '.ts', '.js', '.less', '.css' ],
       alias: {
         '@app': appPath,
         '@pages': pagesPath,
@@ -47,13 +49,12 @@ module.exports = (context) => {
       },
       modules: [
         'node_modules',
-        path.resolve(framePath, 'node_modules') // 使用框架中的module
       ]
     },
     resolveLoader: {
       modules: [
         'node_modules',
-        path.resolve(framePath, 'node_modules') // 使用框架中的loader
+        path.resolve(__dirname, 'loaders'),
       ]
     },
     module: {
@@ -61,14 +62,19 @@ module.exports = (context) => {
         {
           test: /\.js(x?)$/,
           use: [
-            { loader: 'babel-loader' }
+            {
+              loader: 'babel-loader',
+              options: {
+                presets: ['@babel/preset-env', '@babel/preset-react'],
+                plugins: []
+              }
+            }
           ],
           include,
         },
         {
           test: /\.ts(x?)$/,
           use: [
-            { loader: 'babel-loader' },
             {
               loader: 'ts-loader',
               options: {
@@ -76,6 +82,20 @@ module.exports = (context) => {
                 configFile: path.resolve(weePath, 'tsconfig.json'),
               },
             }
+          ],
+          include,
+        },
+        {
+          test: /\.md$/,
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {
+                presets: ['@babel/preset-env', '@babel/preset-react'],
+                plugins: []
+              }
+            },
+            { loader: 'md-loader' },
           ],
           include,
         },

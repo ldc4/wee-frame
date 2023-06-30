@@ -11,11 +11,11 @@ const { parse, traverse, generate, t } = ast;
 // 生成临时文件夹.wee
 const genWeeDir = async (context: Context) => {
   try {
-    const { appPath, framePath } = context.config;
+    const { appPath } = context.config;
     await rm(path.resolve(appPath, '.wee'), { recursive: true, force: true });
     await mkdir(path.resolve(appPath, '.wee'));
     // 将模版拷入.wee目录下
-    await cp(path.resolve(framePath, '..', 'template'), path.resolve(appPath, '.wee'), { recursive: true });
+    await cp(path.resolve(__dirname, '..', '..', 'template'), path.resolve(appPath, '.wee'), { recursive: true });
   } catch (e: any) {
     console.error(e);
   }
@@ -82,6 +82,7 @@ const genTsConfig = async (context: Context) => {
       strict: true,
       resolveJsonModule: true,
       allowSyntheticDefaultImports: true,
+      noImplicitAny: false,
       paths: {
         "@app/*": [path.resolve(appPath, '*')],
         "@pages/*": [path.resolve(appPath, 'src', 'pages', '*')],

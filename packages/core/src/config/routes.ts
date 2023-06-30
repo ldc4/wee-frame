@@ -6,7 +6,7 @@ const traverseDirInfo = (
   level = 0,
 ): Route[] => {
   const flatResult: Route[] = [];
-  const allowExt = ['.tsx', '.jsx'];
+  const allowExt = ['.tsx', '.jsx', '.md'];
   dirInfo.forEach((item) => {
     if (item.type !== 'dir' && allowExt.indexOf(item.extname) !== -1) {
       const isIndex = item.basename === 'index';

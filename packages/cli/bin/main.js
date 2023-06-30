@@ -8,12 +8,12 @@ const program = new commander.Command();
 
 program
   .command('start [type]')
-  .description('启动（ 应用 - app | 平台 - platform ）')
+  .description('启动（ 应用 - app | 库 - lib ）')
   .action(start);
 
 program
   .command('build [type]')
-  .description('构建（ 应用 - app | 平台 - platform ）')
+  .description('构建（ 应用 - app | 库 - lib ）')
   .action(build);
 
 program

@@ -8,7 +8,6 @@ interface Context {
 // 配置
 interface Config {
   appPath: string,
-  framePath: string,
   routes?: Array<Route>,
   layouts?: Object<string, any>,
 }
