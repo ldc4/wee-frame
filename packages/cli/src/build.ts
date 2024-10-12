@@ -12,7 +12,10 @@ export default async function build(type: any) {
     const compiler = webpack(config);
     compiler.run(() => {});
   } else if (type === 'lib') {
-    const config = require('../config/lib/vite.config');
+    console.log('lib');
+    const context = await vvee.server.lib.init();
+    const config = require('../config/lib/vite.config')(context);
     await vite.build(config);
+    await vvee.server.lib.end(context);
   }
 }

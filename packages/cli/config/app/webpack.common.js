@@ -100,7 +100,7 @@ module.exports = (context) => {
           include,
         },
         {
-          test: /\.(less|css)$/,
+          test: /\.less$/,
           use: [
             { loader: 'style-loader' },
             { loader: 'css-loader' },
@@ -130,11 +130,21 @@ module.exports = (context) => {
             options: { limit: 8192 }
           },
           include,
-        }
+        },
+        // 由于tailwind与less有冲突，所以分开处理
+        {
+          test: /\.css$/,
+          use: [
+            { loader: 'style-loader' },
+            { loader: 'css-loader' },
+            { loader: 'postcss-loader' }
+          ],
+          include: include.concat([path.resolve('node_modules')]),
+        },
       ]
     },
     plugins: [
-      new CleanWebpackPlugin(),
+      ...(mode === 'development' ? [new CleanWebpackPlugin()] : []),
       new HtmlWebpackPlugin({
         templateParameters: {
           title: config.title,

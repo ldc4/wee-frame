@@ -1,25 +1,36 @@
 // 上下文
 interface Context {
   config: Config,
-  _frame: Frame,
-  _app: App,
 }
 
 // 配置
 interface Config {
-  appPath: string,
+  appPath: string,      // 当前应用路径
+  configPath: string,   // 配置文件路径
+  runtimePath: string,  // 运行时文件夹路径
+}
+
+// 应用配置
+interface AppConfig extends Config {
   routes?: Array<Route>,
   layouts?: Object<string, any>,
 }
 
-// 框架
-interface Frame {
-  config: Partial<Config>,
+// 库配置
+interface LibConfig extends Config {
+  entry?: string,
+  output?: string,
+  name?: string,
 }
 
-// 应用
-interface App {
-  config: Partial<Config>,
+// 应用上下文
+interface AppContext extends Context {
+  config: AppConfig,
+}
+
+// 库上下文
+interface LibContext extends Context {
+  config: LibConfig,
 }
 
 // 路由

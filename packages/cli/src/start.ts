@@ -4,11 +4,15 @@ import express from 'express';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import vvee from '@vvee/core';
+import path from 'path';
 
 
 // 启动本地服务器
 export default async function start(type: any) {
+  const packageJson = require(path.resolve(__dirname, '..', 'package.json'));
+
   console.log('启动：', type);
+  console.log('当前版本：', packageJson.version);
   
   if (type === 'app') {
     // 1. 初始化，读取配置信息

@@ -3,39 +3,37 @@ import * as generate from '../generate';
 import _ from 'lodash';
 
 // 获取初始化上下文
-const getInitContext = (): Context => {
+const getAppContext = (): AppContext => {
   return {
     config: {
       appPath: process.cwd(),
-    },
-    _frame: {
-      config: {},
-    },
-    _app: {
-      config: {},
+      runtimePath: '.wee',
+      configPath: '.weerc.ts',
     },
   };
 };
 
 // 加载应用配置
-const loadAppConfig = (configFileName: string): Config => {
-  let config;
+const loadAppConfig = (config: Config): Partial<AppConfig> => {
+  const { appPath, configPath } = config;
   try {
     require('ts-node/register');
-    config = require(path.join(process.cwd(), configFileName)).default;
-    return config;
+    const userConfig = require(path.join(appPath, configPath)).default;
+    return _.pick<AppConfig>(userConfig, [
+      'layouts',
+      'routes',
+    ]);
   } catch (e) {
-    console.warn('没有配置文件app.json，采用默认配置');
+    console.warn('没有配置文件.weerc.ts，采用默认配置');
   }
-  return config;
+  return {};
 };
 
 // 解析配置
-const parseConfig = (context: Context): Config => {
+const parseConfig = (defaultConfig: Config, appConfig: Partial<AppConfig>): Config => {
   return {
-    ...context.config,
-    ...context._frame.config,
-    ...context._app.config
+    ...defaultConfig,
+    ...appConfig,
   }
 };
 
@@ -50,26 +48,12 @@ const initAppProject = async (context: Context) => {
 };
 
 // 初始化，构造上下文
-const init = async (): Promise<Context> => {
-
-  console.log('初始化上下文...');
-
-  const context = getInitContext();
-
-  console.log('加载应用配置...');
-  
-  const configFileName = '.weerc.ts';
-  context._app.config = loadAppConfig(configFileName);
-
-  console.log('解析配置中...');
-
-  context.config = parseConfig(context);
-
-  console.log('初始化应用项目...');
-
-  await initAppProject(context);
-
-  return context;
+const init = async (): Promise<AppContext> => {
+  const appContext = getAppContext();
+  const appConfig = loadAppConfig(appContext.config);
+  appContext.config = parseConfig(appContext.config, appConfig);
+  await initAppProject(appContext);
+  return appContext;
 };
 
 export {

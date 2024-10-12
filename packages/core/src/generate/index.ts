@@ -11,11 +11,11 @@ const { parse, traverse, generate, t } = ast;
 // 生成临时文件夹.wee
 const genWeeDir = async (context: Context) => {
   try {
-    const { appPath } = context.config;
-    await rm(path.resolve(appPath, '.wee'), { recursive: true, force: true });
-    await mkdir(path.resolve(appPath, '.wee'));
+    const { appPath, runtimePath } = context.config;
+    await rm(path.resolve(appPath, runtimePath), { recursive: true, force: true });
+    await mkdir(path.resolve(appPath, runtimePath));
     // 将模版拷入.wee目录下
-    await cp(path.resolve(__dirname, '..', '..', 'template'), path.resolve(appPath, '.wee'), { recursive: true });
+    await cp(path.resolve(__dirname, '..', '..', 'template'), path.resolve(appPath, runtimePath), { recursive: true });
   } catch (e: any) {
     console.error(e);
   }
@@ -72,6 +72,7 @@ const genTsConfig = async (context: Context) => {
   const { appPath } = context.config;
   const tsConfig = {
     compilerOptions: {
+      declaration: true,
       target: 'esnext',
       module: 'esnext',
       moduleResolution: 'node',
@@ -99,7 +100,7 @@ const genTsConfig = async (context: Context) => {
 };
 
 // 生成路由配置
-const genRouteConfig = async (context: Context) => {
+const genRouteConfig = async (context: AppContext) => {
   const {
     appPath,
     layouts: layoutsConfigData,
@@ -126,8 +127,19 @@ const genRouteConfig = async (context: Context) => {
   await writeRouteInfo2File(totalRouteInfo, routePath);
 };
 
+// 生成Package.json配置项
+const genPackageJsonConfig = async (context: LibContext) => {
+  const { output, name, appPath } = context.config;
+  const packageJson = require(path.resolve(appPath, 'package.json'));
+  packageJson.main = `./${output}/${name}.umd.js`;
+  packageJson.module = `./${output}/${name}.mjs`;
+  packageJson.types = `./${output}/types/${name}.d.ts`;
+  await writeFile('./package.json', `${JSON.stringify(packageJson, null, 2)}\n`, 'utf8');
+};
+
 export {
   genWeeDir,
   genTsConfig,
   genRouteConfig,
+  genPackageJsonConfig,
 };

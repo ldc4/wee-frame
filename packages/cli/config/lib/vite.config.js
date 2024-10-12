@@ -1,38 +1,44 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import typescript from '@rollup/plugin-typescript';
+const { defineConfig } = require('vite');
+const react = require('@vitejs/plugin-react');
+const typescript = require('@rollup/plugin-typescript');
 
 const path = require("path");
 
-const resolvePath = (str: string) => path.resolve(__dirname, str);
+const resolvePath = (str) => {
+  return path.resolve(process.cwd(), str);
+};
 
-export default defineConfig({
-  plugins: [
-    react(),
-    typescript({
-      target: 'es5',
-      rootDir: resolve('src/'),
-      declaration: true,
-      declarationDir: resolve('lib'),
-      exclude: resolve('node_modules/**'),
-      allowSyntheticDefaultImports: true,
-    }),
-  ],
-  build: {
-    lib: {
-      entry: resolvePath("src/index.ts"),
-      name: "componentsName",
-      fileName: format => `componentsName.${format}.js`,
-    },
-    rollupOptions: {
+module.exports = (context) => {
+  const { entry, output, name, runtimePath } = context.config;
+
+  return defineConfig({
+    plugins: [
+      react.default(),
+      typescript.default({
+        tsconfig: resolvePath(path.join(runtimePath, 'tsconfig.json')),
+        declaration: true,
+        declarationDir: `${output}/types`,
+        rootDir: resolvePath(entry),
+        include: ['*.ts', '*.tsx'],
+      }),
+    ],
+    build: {
+      outDir: output,
+      lib: {
+        entry: resolvePath(path.join(entry, 'index.ts')),
+        name,
+        fileName: name,
+      },
+      rollupOptions: {
         external: ["react", "react-dom"],
         output: {
           globals: {
             react: "react",
             "react-dom": "react-dom",
           },
-        },      
+        },
+      },
     },
-  },
-});
+  });
+};
 
