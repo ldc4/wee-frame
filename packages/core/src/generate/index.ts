@@ -72,7 +72,7 @@ const genTsConfig = async (context: Context) => {
   const { appPath } = context.config;
   const tsConfig = {
     compilerOptions: {
-      declaration: true,
+      declaration: false,
       target: 'esnext',
       module: 'esnext',
       moduleResolution: 'node',
