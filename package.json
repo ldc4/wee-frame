@@ -6,7 +6,10 @@
   "workspaces": [
     "packages/*"
   ],
-  "scripts": {},
+  "scripts": {
+    "version": "lerna version",
+    "publish": "lerna publish"
+  },
   "devDependencies": {
     "lerna": "^6.0.1"
   }
