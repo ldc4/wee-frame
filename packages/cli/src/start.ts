@@ -13,7 +13,7 @@ export default async function start(type: any) {
 
   console.log('启动：', type);
   console.log('当前版本：', packageJson.version);
-  
+
   if (type === 'app') {
     // 1. 初始化，读取配置信息
     const context = await vvee.server.app.init();
