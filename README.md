@@ -19,10 +19,15 @@ wee-frame采用lerna多包管理:
 - cli: 框架的命令行工具，用于初始化项目，启动项目，构建项目等
 - core: 框架的核心，提供框架的基础能力
 
-开发环境依赖：`>= Node 16`
+开发环境依赖：`>= Node 18`
 
 1. 根目录下，执行`npm install`
 2. 切换到各个packages中去开发
+
+## 发包指引
+
+先执行npm run version，修改版本号
+然后执行npm run publish，自动发布npm包
 
 ## 知识地图
 
