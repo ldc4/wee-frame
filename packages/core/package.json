@@ -1,6 +1,6 @@
 {
   "name": "@vvee/core",
-  "version": "0.0.6",
+  "version": "0.0.9",
   "description": "wee-frame core",
   "main": "dist/index.js",
   "scripts": {
@@ -9,12 +9,12 @@
   "author": "weedust",
   "license": "MIT",
   "dependencies": {
-    "minimatch": "^9.0.1",
     "@babel/generator": "^7.20.3",
     "@babel/parser": "^7.20.3",
     "@babel/traverse": "^7.20.1",
     "@babel/types": "^7.20.2",
     "@types/babel__generator": "^7.6.4",
-    "@types/babel__traverse": "^7.18.2"
+    "@types/babel__traverse": "^7.18.2",
+    "minimatch": "^9.0.1"
   }
 }
