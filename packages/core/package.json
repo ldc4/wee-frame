@@ -4,7 +4,8 @@
   "description": "wee-frame core",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "prepack": "npm run build"
   },
   "author": "weedust",
   "license": "MIT",
