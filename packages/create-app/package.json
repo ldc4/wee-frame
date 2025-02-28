@@ -1,6 +1,6 @@
 {
   "name": "@vvee/create-app",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "wee-frame create-app",
   "main": "index.js",
   "bin": {
