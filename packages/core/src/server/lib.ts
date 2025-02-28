@@ -18,11 +18,12 @@ const getLibContext = (): LibContext => {
 
 
 // 加载库配置
-const loadLibConfig = async (config: Config): Promise<Partial<LibConfig>> => {
+const loadLibConfig = (config: Config): Partial<LibConfig> => {
   const { appPath, configPath } = config;
   try {
-    const userConfig = await import(path.join(appPath, configPath));
-    return _.pick<LibConfig>(userConfig, [
+    require('ts-node/register');
+    const userConfig = require(path.join(appPath, configPath)).default;
+    return _.pick<AppConfig>(userConfig, [
       'entry',
       'output',
       'name',
