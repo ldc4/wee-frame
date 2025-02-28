@@ -18,13 +18,14 @@ const getLibContext = (): LibContext => {
 
 
 // 加载库配置
-const loadLibConfig = (config: Config): Partial<LibConfig> => {
+const loadLibConfig = async (config: Config): Promise<Partial<LibConfig>> => {
   const { appPath, configPath } = config;
   try {
-    require('ts-node/register');
-    const userConfig = require(path.join(appPath, configPath)).default;
-    return _.pick<AppConfig>(userConfig, [
+    const userConfig = await import(path.join(appPath, configPath));
+    return _.pick<LibConfig>(userConfig, [
       'entry',
+      'output',
+      'name',
     ]);
   } catch (e) {
     console.warn('没有配置文件.weerc.ts，采用默认配置');
@@ -55,7 +56,7 @@ const endLibProject = async (context: Context) => {
 
 const init = async (): Promise<LibContext> => {
   const libContext = getLibContext();
-  const libConfig = loadLibConfig(libContext.config);
+  const libConfig = await loadLibConfig(libContext.config);
   libContext.config = parseConfig(libContext.config, libConfig);
   await initLibProject(libContext);
   return libContext;
