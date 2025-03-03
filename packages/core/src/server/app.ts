@@ -14,12 +14,11 @@ const getAppContext = (): AppContext => {
 };
 
 // 加载应用配置
-const loadAppConfig = async (config: Config): Promise<Partial<AppConfig>> => {
+const loadAppConfig = (config: Config): Partial<AppConfig> => {
   const { appPath, configPath } = config;
   try {
-    require('ts-node').register({ transpileOnly: true });
-    const module = await import(path.join(appPath, configPath));
-    const userConfig = module.default || module;
+    require('ts-node/register');
+    const userConfig = require(path.join(appPath, configPath)).default;
     return _.pick<AppConfig>(userConfig, [
       'layouts',
       'routes',
@@ -51,7 +50,7 @@ const initAppProject = async (context: Context) => {
 // 初始化，构造上下文
 const init = async (): Promise<AppContext> => {
   const appContext = getAppContext();
-  const appConfig = await loadAppConfig(appContext.config);
+  const appConfig = loadAppConfig(appContext.config);
   appContext.config = parseConfig(appContext.config, appConfig);
   await initAppProject(appContext);
   return appContext;

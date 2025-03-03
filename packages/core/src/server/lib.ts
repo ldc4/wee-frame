@@ -18,12 +18,11 @@ const getLibContext = (): LibContext => {
 
 
 // 加载库配置
-const loadLibConfig = async (config: Config): Promise<Partial<LibConfig>> => {
+const loadLibConfig = (config: Config): Partial<LibConfig> => {
   const { appPath, configPath } = config;
   try {
-    require('ts-node').register({ transpileOnly: true });
-    const module = await import(path.join(appPath, configPath));
-    const userConfig = module.default || module;
+    require('ts-node/register');
+    const userConfig = require(path.join(appPath, configPath)).default;
     return _.pick<AppConfig>(userConfig, [
       'entry',
       'output',
@@ -58,7 +57,7 @@ const endLibProject = async (context: Context) => {
 
 const init = async (): Promise<LibContext> => {
   const libContext = getLibContext();
-  const libConfig = await loadLibConfig(libContext.config);
+  const libConfig = loadLibConfig(libContext.config);
   libContext.config = parseConfig(libContext.config, libConfig);
   await initLibProject(libContext);
   return libContext;
