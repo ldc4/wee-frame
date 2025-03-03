@@ -17,6 +17,7 @@ const getAppContext = (): AppContext => {
 const loadAppConfig = async (config: Config): Promise<Partial<AppConfig>> => {
   const { appPath, configPath } = config;
   try {
+    require('ts-node').register({ transpileOnly: true });
     const module = await import(path.join(appPath, configPath));
     const userConfig = module.default || module;
     return _.pick<AppConfig>(userConfig, [
