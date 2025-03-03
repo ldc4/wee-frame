@@ -14,11 +14,11 @@ const getAppContext = (): AppContext => {
 };
 
 // 加载应用配置
-const loadAppConfig = (config: Config): Partial<AppConfig> => {
+const loadAppConfig = async (config: Config): Promise<Partial<AppConfig>> => {
   const { appPath, configPath } = config;
   try {
-    require('ts-node/register');
-    const userConfig = require(path.join(appPath, configPath)).default;
+    const module = await import(path.join(appPath, configPath));
+    const userConfig = module.default || module;
     return _.pick<AppConfig>(userConfig, [
       'layouts',
       'routes',
