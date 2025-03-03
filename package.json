@@ -12,9 +12,6 @@
     "publish": "lerna publish from-package"
   },
   "devDependencies": {
-    "@types/node": "^22.13.8",
-    "lerna": "^8.1.9",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.8.2"
+    "lerna": "^8.1.9"
   }
 }
