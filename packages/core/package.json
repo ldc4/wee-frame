@@ -1,6 +1,6 @@
 {
   "name": "@vvee/core",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "wee-frame core",
   "main": "dist/index.js",
   "scripts": {
